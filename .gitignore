@@ -1,0 +1,50 @@
+# ── Compiled C backend (rebuild with build.bat / build.sh) ───────────────────
+backend/imager.exe
+backend/imager
+*.o
+*.obj
+
+# ── Bundled runtime DLLs (copy from MSYS2 UCRT64 when packaging) ──────────────
+backend/*.dll
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ── PyInstaller (keep our hand-written ForensicDiskImager.spec) ──────────────
+build/
+dist/
+*.spec
+!ForensicDiskImager.spec
+
+# ── Runtime / evidence output (never commit evidence or logs) ────────────────
+forensic_imager.log
+*.E01
+*.E0[0-9]
+*.dd
+*.img
+*.raw
+*.udf
+logical_audit.csv
+*.hashes.txt
+*.img.txt
+
+# ── Editor / OS ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ── Build / packaging tooling (kept local, NOT published) ────────────────────
+build.bat
+build.sh
+package.bat
+ForensicDiskImager.spec
+tools/
+docs/
+requirements.txt
+
+# ── Local agent config ───────────────────────────────────────────────────────
+.claude/
