@@ -1,0 +1,3 @@
+# Forensic Disk Imager — Python GUI dependencies
+customtkinter>=5.2.2   # dark-themed Tk GUI
+pycdlib>=1.12.0        # builds the UDF volume image for logical-E01 output

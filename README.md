@@ -47,8 +47,47 @@ access):
 2. Select the source (a drive, or a folder) and an output location.
 3. Pick the **output format** and **compression**, and optionally enter the
    **case information**.
-4. Press **START IMAGING** and watch the live dashboard. The evidence is verified
-   automatically when imaging completes.
+4. Press **START IMAGING**. The evidence is verified automatically on completion.
+
+---
+
+## Build from source
+
+**Dependencies**
+- Python GUI: `pip install -r requirements.txt`
+- C backend (Windows): [MSYS2](https://www.msys2.org/) UCRT64 + libewf
+  ```bash
+  pacman -S mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-libewf
+  ```
+- C backend (Linux): `sudo apt install build-essential libewf-dev`
+
+**Build the engine**
+```bash
+./build.bat       # Windows (MSYS2 UCRT64)  -> backend/imager.exe
+./build.sh        # Linux                    -> backend/imager
+```
+
+**Run**
+```bash
+python app.py     # Windows   (python3 on Linux; run elevated for raw access)
+```
+
+---
+
+## Packaging (standalone Windows app)
+
+Produce a single `.exe` that runs on a bare Windows 10/11 machine — no Python,
+toolchain, or libraries required on the target. Run from the project root, in
+order:
+
+```bash
+./build.bat                  # MSYS2 UCRT64 — build the engine
+bash tools/bundle_dlls.sh    # MSYS2 UCRT64 — bundle the runtime DLL chain
+package.bat                  # freeze GUI + engine into one .exe
+```
+
+Result: **`dist/ForensicDiskImager.exe`** (~30 MB, self-contained). Copy that one
+file anywhere and run it (as Administrator for raw drive access).
 
 ---
 
@@ -59,6 +98,8 @@ access):
 | `<name>.E01` / `<name>.dd` | the evidence image (E01 may span multiple segments) |
 | `<name>.img.txt` | chain-of-custody audit report (case info + MD5/SHA-1/SHA-256) |
 | `logical_audit.csv` | per-file MD5/SHA-1/SHA-256 + timestamps (logical modes) |
+
+Verify an E01 set independently with libewf's own tool: `ewfverify "<name>.E01"`.
 
 ---
 

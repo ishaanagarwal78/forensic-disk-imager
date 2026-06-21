@@ -37,14 +37,8 @@ logical_audit.csv
 .DS_Store
 Thumbs.db
 
-# ── Build / packaging tooling (kept local, NOT published) ────────────────────
-build.bat
-build.sh
-package.bat
-ForensicDiskImager.spec
-tools/
+# ── Internal deep-dive docs (kept local, NOT published) ──────────────────────
 docs/
-requirements.txt
 
 # ── Local agent config ───────────────────────────────────────────────────────
 .claude/
